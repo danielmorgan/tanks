@@ -41,11 +41,13 @@ function Header(fillStyle) {
 }
 
 function Tank(fillStyle) {
+    var _this = this;
     this.width = 20;
     this.height = 30;
     this.x = Math.ceil((windowWidth / 2) - (this.width / 2));
     this.y = Math.ceil((windowHeight / 2) - (this.height / 2));
     this.fillStyle = fillStyle;
+    this.speed = 5;
 
     this.draw = function() {
         ctx.fillStyle = this.fillStyle;
@@ -53,13 +55,13 @@ function Tank(fillStyle) {
     }
 
     this.move = function(event) {
-        if (event.keyCode == 38) this.y += 1; // up
-        if (event.keyCode == 40) this.y += -1; // down
-        if (event.keyCode == 37) this.x += -1; // left
-        if (event.keyCode == 39) this.x += 1; // right
+        if (event.keyIdentifier === 'Up') _this.y -= _this.speed;
+        if (event.keyIdentifier === 'Down') _this.y += _this.speed;
+        if (event.keyIdentifier === 'Left') _this.x -= _this.speed;
+        if (event.keyIdentifier === 'Right') _this.x += _this.speed;
     }
 }
 
 var header = new Header('rgba(150, 0, 100, 1)');
 var tank1 = new Tank('rgba(20, 240, 20, 1)');
-window.addEventListener('keydown', tank1.move, false);
+window.addEventListener('keydown', tank1.move, true);
