@@ -2,7 +2,7 @@
 
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
-var canvas = document.body.appendChild(document.createElement('canvas'));
+var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 window.addEventListener('resize', resize);
 window.addEventListener('load', resize);
@@ -18,24 +18,23 @@ function resize() {
 function render() {
     requestAnimationFrame(render);
     background();
-    tank1.draw();
     header.draw();
+    tank1.draw();
 }
 
 function background() {
-    ctx.fillStyle = 'rgba(20, 30, 60, 1)';
+    ctx.fillStyle = 'rgba(20, 110, 60, 1)';
     ctx.fillRect(0, 0, windowWidth, windowHeight);
 }
 
 function Header(fillStyle) {
-    this.width = 400;
-    this.height = 10;
-    this.x = windowWidth - this.width - 20;
-    this.y = 0;
-    this.fillStyle = fillStyle;
+    this.width = windowWidth - 200;
+    this.height = windowHeight - 160;
+    this.x = 100;
+    this.y = 80;
 
     this.draw = function() {
-        ctx.fillStyle = this.fillStyle;
+        ctx.fillStyle = fillStyle;
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
 }
@@ -47,11 +46,12 @@ function Tank(fillStyle) {
     this.x = Math.ceil((windowWidth / 2) - (this.width / 2));
     this.y = Math.ceil((windowHeight / 2) - (this.height / 2));
     this.fillStyle = fillStyle;
-    this.speed = 5;
+    this.speed = 15;
 
     this.draw = function() {
-        ctx.fillStyle = this.fillStyle;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.fillStyle = _this.fillStyle;
+        ctx.fillRect(_this.x, _this.y, _this.width, _this.height);
+        this.visible = true;
     }
 
     this.move = function(event) {
@@ -62,6 +62,6 @@ function Tank(fillStyle) {
     }
 }
 
-var header = new Header('rgba(150, 0, 100, 1)');
+var header = new Header('rgba(255, 255, 255, 0.1)');
 var tank1 = new Tank('rgba(20, 240, 20, 1)');
 window.addEventListener('keydown', tank1.move, true);
