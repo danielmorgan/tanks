@@ -1,18 +1,22 @@
 'use strict';
 
-var windowWidth = window.innerWidth;
-var windowHeight = window.innerHeight;
+var screen = document.getElementById('screen');
+var screenWidth = screen.offsetWidth;
+var screenHeight = screen.offsetHeight;
+console.log(screenWidth, screenHeight);
+
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
+
 window.addEventListener('resize', resize);
 window.addEventListener('load', resize);
 window.addEventListener('load', render);
 
 function resize() {
-    windowWidth = window.innerWidth;
-    windowHeight = window.innerHeight;
-    canvas.width = windowWidth;
-    canvas.height = windowHeight;
+    screenWidth = screen.offsetWidth;
+    screenHeight = screen.offsetHeight;
+    canvas.width = screenWidth;
+    canvas.height = screenHeight;
 }
 
 function render() {
@@ -24,12 +28,12 @@ function render() {
 
 function background() {
     ctx.fillStyle = 'rgba(20, 110, 60, 1)';
-    ctx.fillRect(0, 0, windowWidth, windowHeight);
+    ctx.fillRect(0, 0, screenWidth, screenHeight);
 }
 
 function Header(fillStyle) {
-    this.width = windowWidth - 200;
-    this.height = windowHeight - 160;
+    this.width = screenWidth - 200;
+    this.height = screenHeight - 160;
     this.x = 100;
     this.y = 80;
 
@@ -43,8 +47,8 @@ function Tank(fillStyle) {
     var _this = this;
     this.width = 20;
     this.height = 30;
-    this.x = Math.ceil((windowWidth / 2) - (this.width / 2));
-    this.y = Math.ceil((windowHeight / 2) - (this.height / 2));
+    this.x = Math.ceil((screenWidth / 2) - (this.width / 2));
+    this.y = Math.ceil((screenHeight / 2) - (this.height / 2));
     this.fillStyle = fillStyle;
     this.speed = 15;
 

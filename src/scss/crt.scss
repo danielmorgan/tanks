@@ -1,6 +1,7 @@
 $ease-out-quint: cubic-bezier(0.230, 1.000, 0.320, 1.000);
 $ease-in-quint: cubic-bezier(0.755, 0.050, 0.855, 0.060);
 $screen-background: rgba(85, 85, 80, 1);
+$screen-radius:30px;
 
 html, body {
     width: 100%;
@@ -25,7 +26,7 @@ body{
     position: absolute;
     top: 0;
     left: 0;
-    zindex: 5;
+    z-index: 5;
     background-image: url(img/tv.png);
     background-size: contain;
     width: 960px;
@@ -33,14 +34,16 @@ body{
 }
 
 .vignette {
-    box-shadow: inset 0 0 250px rgba(0, 0, 0, 0.5),
-                inset 0 0 20px rgba(0, 0, 0, 1);
+    box-shadow: inset 0 0 300px rgba(0, 0, 0, 0.5),
+                inset 0 0 50px rgba(0, 0, 0, 0.75),
+                inset 0 0 15px rgba(0, 0, 0, 1);
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     content: "";
+    border-radius: $screen-radius;
 }
 
 .overlay {
@@ -51,12 +54,14 @@ body{
     font-size: 60px;
     visibility: hidden;
     pointer-events: none;
+    border-radius: $screen-radius;
 }
 
 #canvas {
     width: 100%;
     height: 100%;
     border: none;
+    border-radius: $screen-radius;
 }
 
 .container{
@@ -67,7 +72,7 @@ body{
     left: 150px;
     width: 516px;
     height: 385px;
-    border-radius: 30px;
+    border-radius: $screen-radius;
     position: relative;
     overflow: hidden;
 
