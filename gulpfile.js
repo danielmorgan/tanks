@@ -6,10 +6,16 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
 var watchify = require('watchify');
-var babel = require('babelify');
+var babelify = require('babelify');
 
 function compile(watch) {
-  var bundler = watchify(browserify('./src/js/index.js', { debug: true }).transform(babel));
+  var bundler = watchify(
+    browserify(
+      './src/js/index.js',
+      { debug: true }
+    )
+    .transform(babelify, {presets: ["es2015"]})
+  );
 
   function rebundle() {
     bundler.bundle()
@@ -19,11 +25,11 @@ function compile(watch) {
       .pipe(sourcemaps.init({ loadMaps: true }))
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest('./src'));
+    console.log('-> bundling...');
   }
 
   if (watch) {
     bundler.on('update', function() {
-      console.log('-> bundling...');
       rebundle();
     });
   }
